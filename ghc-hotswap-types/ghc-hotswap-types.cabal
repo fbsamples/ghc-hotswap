@@ -1,0 +1,27 @@
+name:                ghc-hotswap-types
+version:             0.1.0.0
+synopsis:            An example of specifying common libraries between a binary and shared object
+description:
+  Skeleton configuration for sharing commong pieces between a main binary and a shared object built with cabal.
+homepage:            https://github.com/fbsamples/ghc-hotswap
+bug-reports:         https://github.com/fbsamples/ghc-hotswap/issues
+license:             OtherLicense
+license-files:       LICENSE,PATENTS
+author:              Facebook, Inc.
+maintainer:          The Haxl Team <haxl-team@fb.com>
+copyright:           (c) 2017-present, Facebook, Inc. All rights reserved.
+category:            System
+build-type:          Simple
+cabal-version:       >=1.10
+stability:           alpha
+
+library
+  exposed-modules:     Types
+  build-depends:       base >= 4.9.1.0 && < 5.0
+                     , deepseq >= 1.4.2.0 && < 1.5
+                     , text >= 1.2.2.1 && < 1.3
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/fbsamples/ghc-hotswap/ghc-hotswap/ghc-hotswap-types
