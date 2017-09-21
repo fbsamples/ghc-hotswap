@@ -19,24 +19,24 @@ Shared object swapping goodness.
 Quick Start
 -----------
 
-- cd ghc-hotswap-types
-- cabal configure
-- cabal install
-
-- cd ghc-hotswap
-- cabal configure
-- cabal install
-
-- cd ghc-hotswap-so
-- cabal configure --enable-library-for-ghci
-- cabal build
-
+### Build *types*
+  1. cd ghc-hotswap-types
+  2. cabal configure
+  3. cabal install
+### Build *hotswap*
+  1. cd ghc-hotswap
+  2. cabal configure
+  3. cabal install
+### Build *so*
+  1. cd ghc-hotswap-so
+  2. cabal configure --enable-library-for-ghci
+  3. cabal build
 (Note the file path of `dist/build/HSghc-hotswap-so(...).o`)
-
-- cd ghc-hotswap-demo
-- cabal configure
-- cabal build
-- cabal run <path of first .o file>
+### Run demo
+  1. cd ghc-hotswap-demo
+  2. cabal configure
+  3. cabal build
+  4. cabal run <path of first .o file>
 
 ## ghc-hotswap-types
 
@@ -74,7 +74,7 @@ The file we care about gets placed in `ghc-hotswap-so/dist/build/` with a filena
 
 Demo executable for loading + unloading shared objects on the fly.
 
-Note the configuration set [in ghc-hotswap-demo.cabal](ghc-hotswap-demo/ghc-hotswap-demo.cabal). It does not depend on `ghc-hotswap-so` and adds `-rdynamic` and `-fwhole-archive-hs-libs as GHC flags.
+Note the configuration set [in ghc-hotswap-demo.cabal](ghc-hotswap-demo/ghc-hotswap-demo.cabal). It does not depend on `ghc-hotswap-so` and adds `-rdynamic` and `-fwhole-archive-hs-libs` as GHC flags.
 
 - cabal configure
 - cabal run <path-of-first-.o>
