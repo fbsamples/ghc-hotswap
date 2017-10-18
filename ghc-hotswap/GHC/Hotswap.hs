@@ -10,7 +10,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
 {-| A library for safely interacting with frequently updating shared
-objects within a haskell binary. See more documentation at <http://??????>.
+objects within a haskell binary. See more documentation at <https://github.com/fbsamples/ghc-hotswap/>.
 
 Assuming you have some structure of data called `Foo`.
 
