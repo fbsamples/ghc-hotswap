@@ -122,22 +122,21 @@ updateState
   -> FilePath          -- path to the next instance of the shared object
   -> IO ()
 updateState mvar symbolName nextPath = do
-  newVal <- force <$> loadNewSO symbolName nextPath
-  -- Build a new state for this version
-  newLock <- L.new
-  let
-    newState = SOState
-      { lock = newLock
-      , path = nextPath
-      , val = newVal
-      }
-  -- Swapping in the new state means all new calls to `withSO` from the client
-  -- will use the new value. After this it's impossible for a new read lock to
-  -- grab the old state
-  oldState <- swapMVar mvar newState
-  -- All readers in oldState will fall out, so we're safe to destroy state here
-  L.withWrite (lock oldState) $
-    unloadObj (path oldState)
+  modifyMVar_ mvar
+    (\oldState -> do
+        -- unload old object first to allow reload an object by same path
+        -- it should be safe due atomare nature of modifyMVar operation
+        L.withWrite (lock oldState) $
+          unloadObj (path oldState)
+        newVal <- force <$> loadNewSO symbolName nextPath
+        -- Build a new state for this version
+        newLock <- L.new
+        return SOState
+          { lock = newLock
+          , path = nextPath
+          , val  = newVal
+          }
+    )
 
 -- Extract the function pointer as a callable Haskell function
 foreign import ccall "dynamic"
