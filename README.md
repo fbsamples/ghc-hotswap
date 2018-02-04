@@ -70,6 +70,10 @@ The main purpose is to generate an object file that another binary will know how
 
 The file we care about gets placed in `ghc-hotswap-so/dist/build/` with a filename prefix like `HSghc-hotswap-so` and extension `.o`. The path to this file is important (or copy it to a nicer location for yourself) as you'll need it later.
 
+If you use `stack`, you can get the effect of `--enable-library-for-ghc` by compiling with `stack build` and then linking all `.o` files from the `ghc-hotswap-so` project directory in to a single `/tmp/file.o` object file that you can load later, like so: 
+
+  `ld -arch x86_64 -x -r -o /tmp/file.o $(find $(stack path | grep dist-dir | cut -f 2 -d " ") -name "*.o" -type f)`
+
 ## ghc-hotswap-demo
 
 Demo executable for loading + unloading shared objects on the fly.
