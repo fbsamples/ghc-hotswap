@@ -24,7 +24,10 @@ executable ghc-hotswap-demo
                      , ghc-hotswap-types >= 0.1 && < 0.2
   default-language:    Haskell2010
   extra-libraries:     pthread
-  ghc-options:         -rdynamic -fwhole-archive-hs-libs
+  c-sources:           HotswapMain.c
+     -- The HotswapMain.c file is needed for setting the keep_cafs flag in the RTS
+     -- before the runtime starts. This is a prerequisite for dynamic linking.
+  ghc-options:         -rdynamic -fwhole-archive-hs-libs -no-hs-main
 
 source-repository head
   type:     git
