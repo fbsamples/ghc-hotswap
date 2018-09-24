@@ -18,7 +18,7 @@ stability:           alpha
 
 executable ghc-hotswap-demo
   main-is:             Main.hs
-  build-depends:       base >= 4.9 && < 4.11
+  build-depends:       base >= 4.9 && < 4.12
                      , ghc >= 8.2
                      , ghc-hotswap >= 0.1 && < 0.2
                      , ghc-hotswap-types >= 0.1 && < 0.2
